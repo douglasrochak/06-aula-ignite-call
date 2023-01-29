@@ -2,6 +2,8 @@ import { Button, Text, TextInput } from '@doro-ui/react'
 import { ArrowRight } from 'phosphor-react'
 import { Form, FormAnnotation } from './styles'
 
+import { useRouter } from 'next/router'
+
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -27,8 +29,12 @@ export function ClaimUsernameForm() {
     resolver: zodResolver(claimUsernameFormSchema),
   })
 
+  const router = useRouter()
+
   async function handleClaimUsername(data: ClaimUsernameFormData) {
-    console.log(data)
+    const { username } = data
+
+    await router.push(`/register?username=${username}`)
   }
 
   return (
