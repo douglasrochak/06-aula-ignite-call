@@ -7,6 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ArrowRight } from 'phosphor-react'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { api } from '@/lib/axios'
+import { AxiosError } from 'axios'
 
 const registerFormSchema = z.object({
   username: z
@@ -39,12 +41,23 @@ export default function Register() {
     setValue('username', String(router.query?.username))
   }, [router.query?.username, setValue])
 
-  async function handleRegister(data: registerFormDate) {}
+  async function handleRegister(data: registerFormDate) {
+    try {
+      await api.post('/users', {
+        username: data.username,
+        name: data.name,
+      })
+    } catch (error) {
+      if (error instanceof AxiosError && error?.response?.data?.message) {
+        alert(error.response.data.message)
+      }
+    }
+  }
 
   return (
     <Container>
       <Header>
-        <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
+        <Heading as='strong'>Bem-vindo ao Ignite Call!</Heading>
         <Text>
           Precisamos de algumas informações para criar seu perfil! Ah, você pode
           editar essas informações depois.
@@ -52,23 +65,23 @@ export default function Register() {
         <MultiStep size={4} currentStep={1} />
       </Header>
 
-      <Form onSubmit={handleSubmit(handleRegister)} as="form">
+      <Form onSubmit={handleSubmit(handleRegister)} as='form'>
         <label>
-          <Text size="sm">Nome de usuário</Text>
+          <Text size='sm'>Nome de usuário</Text>
           <TextInput
-            prefix="ignite.com/"
-            placeholder="seu-usuário"
+            prefix='ignite.com/'
+            placeholder='seu-usuário'
             {...register('username')}
           />
           {errors.username && <FormError>{errors.username.message}</FormError>}
         </label>
         <label>
-          <Text size="sm">Nome Completo</Text>
-          <TextInput placeholder="seu nome completo" {...register('name')} />
+          <Text size='sm'>Nome Completo</Text>
+          <TextInput placeholder='seu nome completo' {...register('name')} />
           {errors.name && <FormError>{errors.name.message}</FormError>}
         </label>
-        <Button disabled={isSubmitting} type="submit">
-          Próximo passo <ArrowRight weight="bold" />
+        <Button disabled={isSubmitting} type='submit'>
+          Próximo passo <ArrowRight weight='bold' />
         </Button>
       </Form>
     </Container>
