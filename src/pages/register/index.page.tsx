@@ -47,6 +47,8 @@ export default function Register() {
         username: data.username,
         name: data.name,
       })
+
+      await router.push('/register/connect-calendar')
     } catch (error) {
       if (error instanceof AxiosError && error?.response?.data?.message) {
         alert(error.response.data.message)
@@ -57,7 +59,7 @@ export default function Register() {
   return (
     <Container>
       <Header>
-        <Heading as='strong'>Bem-vindo ao Ignite Call!</Heading>
+        <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
         <Text>
           Precisamos de algumas informações para criar seu perfil! Ah, você pode
           editar essas informações depois.
@@ -65,23 +67,23 @@ export default function Register() {
         <MultiStep size={4} currentStep={1} />
       </Header>
 
-      <Form onSubmit={handleSubmit(handleRegister)} as='form'>
+      <Form onSubmit={handleSubmit(handleRegister)} as="form">
         <label>
-          <Text size='sm'>Nome de usuário</Text>
+          <Text size="sm">Nome de usuário</Text>
           <TextInput
-            prefix='ignite.com/'
-            placeholder='seu-usuário'
+            prefix="ignite.com/"
+            placeholder="seu-usuário"
             {...register('username')}
           />
           {errors.username && <FormError>{errors.username.message}</FormError>}
         </label>
         <label>
-          <Text size='sm'>Nome Completo</Text>
-          <TextInput placeholder='seu nome completo' {...register('name')} />
+          <Text size="sm">Nome Completo</Text>
+          <TextInput placeholder="seu nome completo" {...register('name')} />
           {errors.name && <FormError>{errors.name.message}</FormError>}
         </label>
-        <Button disabled={isSubmitting} type='submit'>
-          Próximo passo <ArrowRight weight='bold' />
+        <Button disabled={isSubmitting} type="submit">
+          Próximo passo <ArrowRight weight="bold" />
         </Button>
       </Form>
     </Container>
