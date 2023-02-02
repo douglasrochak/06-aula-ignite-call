@@ -6,7 +6,7 @@ import { AuthError, ConnectBox, ConnectItem } from './styles'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
-export default function Register() {
+export default function ConnectCalendar() {
   const session = useSession()
   const router = useRouter()
 
@@ -21,7 +21,7 @@ export default function Register() {
   return (
     <Container>
       <Header>
-        <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
+        <Heading as="strong">Conecte sua agenda!</Heading>
         <Text>
           Precisamos de algumas informações para criar seu perfil! Ah, você pode
           editar essas informações depois.
