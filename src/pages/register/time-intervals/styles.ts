@@ -1,4 +1,4 @@
-import { Box, styled } from '@doro-ui/react'
+import { Box, styled, Text } from '@doro-ui/react'
 
 export const IntervalBox = styled(Box, {
   display: 'flex',
@@ -43,4 +43,10 @@ export const IntervalInputs = styled('div', {
   'input::-webkit-calendar-picker-indicator': {
     filter: 'invert(100%) brightness(40%)',
   },
+})
+
+export const FormError = styled(Text, {
+  color: '#f75a68',
+  marginBottom: '$4',
+  textAlign: 'center',
 })
