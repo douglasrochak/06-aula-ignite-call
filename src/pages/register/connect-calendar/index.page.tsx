@@ -1,7 +1,6 @@
 import { Button, Heading, MultiStep, Text } from '@doro-ui/react'
 import { Container, Header } from '../styles'
 import { ArrowRight, Check } from 'phosphor-react'
-// import { api } from '@/lib/axios'
 import { AuthError, ConnectBox, ConnectItem } from './styles'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -15,7 +14,7 @@ export default function ConnectCalendar() {
   const isSignedIn = session.status === 'authenticated'
 
   async function handleConnectCalendar() {
-    await signIn('google', { callbackUrl: '/register/connect-calendar' })
+    await signIn('google')
   }
 
   async function handleNavigateToNextStep() {

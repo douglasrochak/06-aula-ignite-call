@@ -32,8 +32,6 @@ export function buildNextAuthOptions(
           }
         },
       }),
-
-      // ...add more providers here
     ],
     callbacks: {
       async signIn({ account }) {
